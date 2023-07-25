@@ -28,3 +28,38 @@ FROM sleep_efficiency GROUP BY gender;
 SELECT id,age,light_sleep_percentage,deep_sleep_percentage FROM sleep_efficiency
 WHERE deep_sleep_percentage BETWEEN 25 AND 45
 ORDER BY light_sleep_percentage OFFSET 10 LIMIT 20;
+
+-- Problem 4
+-- Group by on exercise frequency and smoking status and show average deep sleep time,
+-- average light sleep time and avg rem sleep time.
+
+SELECT * FROM sleep_efficiency LIMIT 5;
+
+SELECT 
+    exercise_frequency,
+    smoking_status,
+    AVG(deep_sleep_percentage)::numeric(10, 2) AS avg_deep_sleep_time,
+    AVG(light_sleep_percentage)::numeric(10, 2) AS avg_light_sleep_time,
+    AVG(rem_sleep_percentage)::numeric(10, 2) AS avg_rem_sleep_time
+FROM
+    sleep_efficiency
+GROUP BY
+    exercise_frequency,
+    smoking_status;
+
+-- Problem 5
+-- Group By on Awekning and show AVG Caffeine consumption, AVG Deep sleep time and AVG Alcohol 
+-- consumption only for people who do exercise atleast 3 days a week. 
+-- Show result in descending order awekenings
+
+SELECT * FROM sleep_efficiency LIMIT 5;
+
+SELECT 
+awakenings,
+AVG(caffeine_consumption)::numeric(10, 2) AS avg_caffeine_consumption,
+AVG(deep_sleep_percentage)::numeric(10, 2) AS avg_deep_sleep_time,
+AVG(alcohol_consumption)::numeric(10, 2) AS avg_alcohol_consumption
+FROM sleep_efficiency
+WHERE exercise_frequency >= 3
+GROUP BY awakenings
+ORDER BY awakenings DESC NULLS LAST;

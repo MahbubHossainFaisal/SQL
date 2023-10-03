@@ -1,0 +1,4 @@
+Do the followings for the above query:
+1) Analyse the query and try to predict what question it solve (Title: Question)
+2) Show the query (Title: Query)
+3) Explain the query in details.(Title: Explanation)
